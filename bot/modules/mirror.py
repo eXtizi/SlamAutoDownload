@@ -30,10 +30,10 @@ import threading
 import re
 import random
 import string
-
+import json
 ariaDlManager = AriaDownloadHelper()
 ariaDlManager.start_listener()
-
+ckey = '550c6e86fde0d46fdbf440e940a7179fae6dd'
 class MirrorListener(listeners.MirrorListeners):
     def __init__(self, bot, update, pswd, isTar=False, extract=False, qbit=False):
         super().__init__(bot, update)
@@ -153,6 +153,7 @@ class MirrorListener(listeners.MirrorListeners):
                 msg += f'\n<b>Type: </b><code>{typ}</code>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
+                link=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, link)).text)['url']['shortLink']
                 surl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={link}').text
                 buttons.buildbutton("☁️ Drive Link", surl)
             else:
@@ -164,6 +165,7 @@ class MirrorListener(listeners.MirrorListeners):
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
+                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']['shortLink']
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text
                         buttons.buildbutton("⚡ Index Link", siurl)
                     else:
@@ -171,6 +173,8 @@ class MirrorListener(listeners.MirrorListeners):
                 else:
                     share_urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
+                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']['shortLink']
+                        share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_urls)).text)['url']['shortLink']
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text
                         siurls = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_urls}').text
                         buttons.buildbutton("⚡ Index Link", siurl)
