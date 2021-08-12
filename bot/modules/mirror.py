@@ -167,7 +167,7 @@ class MirrorListener(listeners.MirrorListeners):
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
-                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']
+                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, urllib.parse.quote(share_url))).text)['url']
                         
                         share_url=share_url['shortLink']
                         print(share_url)
@@ -178,9 +178,10 @@ class MirrorListener(listeners.MirrorListeners):
                 else:
                     share_urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
-                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']
                         
-                        share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_urls)).text)['url']
+                        share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, urllib.parse.quote(share_url))).text)['url']
+                        
+                        share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, urllib.parse.quote(share_urls))).text)['url']
                         print(share_url,share_urls)
                         share_url=json.loads(share_url)['shortLink']
                         share_urls=json.loads(share_urls)['shortLink']
