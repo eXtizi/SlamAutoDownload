@@ -154,6 +154,7 @@ class MirrorListener(listeners.MirrorListeners):
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
                 link=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, link)).text)['url']
+                link=link['shortLink']
                 print(link)
                 surl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={link}').text
                 buttons.buildbutton("☁️ Drive Link", surl)
@@ -167,7 +168,7 @@ class MirrorListener(listeners.MirrorListeners):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']
-                        print(share_url)
+                        share_url=share_url['shortLink']
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text#['shortLink']
                         buttons.buildbutton("⚡ Index Link", siurl)
                     else:
@@ -177,6 +178,8 @@ class MirrorListener(listeners.MirrorListeners):
                     if SHORTENER is not None and SHORTENER_API is not None:
                         share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']
                         share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_urls)).text)['url']
+                        share_url=share_url['shortLink']
+                        share_urls=share_url['shortLink']
                         print(share_url,share_urls)
                         
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text
