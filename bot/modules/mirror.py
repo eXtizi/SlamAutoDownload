@@ -183,8 +183,8 @@ class MirrorListener(listeners.MirrorListeners):
                         
                         share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, urllib.parse.quote(share_urls))).text)['url']
                         print(share_url,share_urls)
-                        share_url=json.loads(share_url)['shortLink']
-                        share_urls=json.loads(share_urls)['shortLink']
+                        share_url=share_url['shortLink']
+                        share_urls=share_urls['shortLink']
                         print(share_url,share_urls)
                         
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text
