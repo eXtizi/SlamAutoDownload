@@ -176,6 +176,7 @@ class MirrorListener(listeners.MirrorListeners):
                         share_url=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url']['shortLink']
                         share_urls=json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_urls)).text)['url']['shortLink']
                         siurl = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_url}').text
+                        print(json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_urls)).text)['url'],json.loads(requests.get('http://cutt.ly/api/api.php?key={}&short={}'.format(ckey, share_url)).text)['url'])
                         siurls = requests.get(f'https://{SHORTENER}/api/{SHORTENER_API}?s={share_urls}').text
                         buttons.buildbutton("⚡ Index Link", siurl)
                         if VIEW_LINK:
