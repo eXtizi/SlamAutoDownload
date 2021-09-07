@@ -45,7 +45,7 @@ def stats(update, context):
 
 
 def start(update, context):
-    print(update)
+    
     start_string = f'''
 This bot can mirror all your links to Google Drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
@@ -244,7 +244,7 @@ def main():
 app.start()
 main()
 @app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
-async def files_handler(bot,Message,update=BotCommands.MirrorCommand):
+async def files_handler(bot,Message,update=Message):
         print('file')
         link=''
         file = None
