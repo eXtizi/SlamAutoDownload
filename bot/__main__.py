@@ -18,7 +18,8 @@ from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_tim
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates
-
+from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper
+from bot.helper.ext_utils import fs_utils, bot_utils
 
 def stats(update, context):
     currentTime = get_readable_time(time.time() - botStartTime)
@@ -235,6 +236,34 @@ def main():
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
+    
+@bot.on_message(filters.group & (filters.video|filters.document|filters.audio) & ~filters.edited)
+async def files_handler(bot,Message):
+        file = None
+        media_array = [Message.document, Message.video, Message.audio]
+        for i in media_array:
+            if i is not None:
+                file = i
+                break
+
+        if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
+            if file is not None:
+                if file.mime_type != "application/x-bittorrent":
+                    listener = mirror.MirrorListener(bot, update, pswd, isTar, extract)
+                    tg_downloader = TelegramDownloadHelper(listener)
+                    ms = update.message
+                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
+                    return
+                else:
+                    if qbit:
+                        file.get_file().download(custom_path=f"/usr/src/app/{file.file_name}")
+                        link = f"/usr/src/app/{file.file_name}"
+                    else:
+                        link = file.get_file().file_path
+
+    
 app.start()
 main()
 idle()
+
+
