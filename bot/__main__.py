@@ -245,6 +245,7 @@ main()
 @app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
 async def files_handler(bot,Message):
         print('file')
+        link=''
         file = None
         media_array = [Message.document, Message.video, Message.audio]
         for i in media_array:
