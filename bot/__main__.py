@@ -237,6 +237,11 @@ def main():
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
     
+
+
+    
+app.start()
+main()
 @bot.on_message(filters.group & (filters.video|filters.document|filters.audio) & ~filters.edited)
 async def files_handler(bot,Message):
         file = None
@@ -260,10 +265,6 @@ async def files_handler(bot,Message):
                         link = f"/usr/src/app/{file.file_name}"
                     else:
                         link = file.get_file().file_path
-
-    
-app.start()
-main()
 idle()
 
 
