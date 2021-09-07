@@ -258,7 +258,7 @@ def main():
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
-    dispatcher.add_handler(files_handler,((filters.video|filters.document|filters.audio) & ~filters.edited),-1)
+    dispatcher.add_handler(files_handler,(filters.video|filters.document|filters.audio),-1)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
