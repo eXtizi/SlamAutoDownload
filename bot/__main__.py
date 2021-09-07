@@ -68,7 +68,7 @@ async def files_handler(update,context ):
         print('file')
         link=''
         file = None
-        media_array = [Message.document, Message.video, Message.audio]
+        media_array = [update.message.document, update.message.video, update.message.audio]
         for i in media_array:
             if i is not None:
                 file = i
