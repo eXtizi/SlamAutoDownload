@@ -83,7 +83,7 @@ def fileshandler(update,context ):
                     listener = mirror.MirrorListener(bot, update, pswd='', isTar=False, extract=False)
                     tg_downloader = TelegramDownloadHelper(listener)
                     ms = update.message
-                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
+                    tg_downloader.add_downloadauto(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
                     return
                 else:
                     if qbit:
