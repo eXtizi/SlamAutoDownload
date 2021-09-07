@@ -3,7 +3,7 @@ import signal
 import os
 import asyncio
 
-from pyrogram import idle
+from pyrogram import idle,filters
 from bot import app
 from sys import executable
 
