@@ -146,7 +146,7 @@ class TelegramDownloadHelper(DownloadHelper):
                     if i in name:
                         name=name.replace(i,'')
                         
-            name ='.'.join(name.split('.')[0:-2])+'filmmanialk'+name.split('.')[-1]
+            name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
             if download:
                 if STOP_DUPLICATE:
                     LOGGER.info(f"Checking File/Folder if already in Drive...")
