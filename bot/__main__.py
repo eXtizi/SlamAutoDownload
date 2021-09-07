@@ -242,7 +242,7 @@ def main():
     
 app.start()
 main()
-@app.on_message(filters.group & (filters.video|filters.document|filters.audio) & ~filters.edited)
+@app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
 async def files_handler(bot,Message):
         print('file')
         file = None
