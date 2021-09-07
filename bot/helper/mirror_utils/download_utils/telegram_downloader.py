@@ -124,7 +124,7 @@ class TelegramDownloadHelper(DownloadHelper):
     def cancel_download(self):
         LOGGER.info(f'Cancelling download on user request: {self.gid}')
         self.__is_cancelled = True
-def add_downloadauto(self, message, path, filename):
+    def add_downloadauto(self, message, path, filename):
         _message = self._bot.get_messages(message.chat.id, message_ids =message.message_id)
         media = None
         media_array = [_message.document, _message.video, _message.audio]
