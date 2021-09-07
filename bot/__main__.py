@@ -6,7 +6,7 @@ import asyncio
 from pyrogram import idle,filters
 from bot import app
 from sys import executable
-from telegram import update
+
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 from wserver import start_server_async
@@ -244,7 +244,7 @@ def main():
 app.start()
 main()
 @app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
-async def files_handler(bot,Message,update=app.getUpdates()):
+async def files_handler(bot,Message,update=updater ):
         print('file')
         link=''
         file = None
