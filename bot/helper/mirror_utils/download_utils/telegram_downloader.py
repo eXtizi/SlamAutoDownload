@@ -143,7 +143,8 @@ class TelegramDownloadHelper(DownloadHelper):
                     if i in name:
                         name=name.replace(i,'')
                         
-                name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
+                name =name.replace('.'+name.split('.')[-1],'')+'.filmmanialk.'+name.split('.')[-1]
+                path = path + name
             else:
                 name = filename          
                 if RPLC_STR:
@@ -151,7 +152,7 @@ class TelegramDownloadHelper(DownloadHelper):
                     if i in name:
                         name=name.replace(i,'')
                         
-                name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
+                name =name.replace('.'+name.split('.')[-1],'')+'.filmmanialk.'+name.split('.')[-1]
                 path = path + name      
             if download:
                 if STOP_DUPLICATE:
