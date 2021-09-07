@@ -10,6 +10,7 @@ from sys import executable
 from telegram import ParseMode
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
+from telegram.ext.filters import Filters
 from wserver import start_server_async
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, SERVER_PORT
 from bot.helper.ext_utils import fs_utils
@@ -254,7 +255,7 @@ def main():
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     #filters1=filters.media
-    files_handler = MessageHandler((filters.all),fileshandler, run_async=True)
+    files_handler = MessageHandler(Filters.video|Filters.document,fileshandler, run_async=True)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
