@@ -64,7 +64,32 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     else :
         sendMarkup(f"Oops! not a Authorized user.\nPlease deploy your own <b>slam-tg-mirror-bot</b>.", context.bot, update, reply_markup)
 
+async def files_handler(bot,Message,update=dispatcher. ):
+        print('file')
+        link=''
+        file = None
+        media_array = [Message.document, Message.video, Message.audio]
+        for i in media_array:
+            if i is not None:
+                file = i
+                break
 
+        if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
+            if file is not None:
+                if file.mime_type != "application/x-bittorrent":
+                    listener = mirror.MirrorListener(bot, update, pswd='', isTar=False, extract=False)
+                    tg_downloader = TelegramDownloadHelper(listener)
+                    ms = update.message
+                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
+                    return
+                else:
+                    if qbit:
+                        file.get_file().download(custom_path=f"/usr/src/app/{file.file_name}")
+                        link = f"/usr/src/app/{file.file_name}"
+                    else:
+                        link = file.get_file().file_path
+                        
+                        
 def restart(update, context):
     restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     # Save restart message object in order to reply to it after restarting
@@ -233,6 +258,7 @@ def main():
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
+    dispatcher.add_handler(files_handler,(filters.video|filters.document|filters.audio) & ~filters.edited),-1)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
@@ -243,31 +269,8 @@ def main():
     
 app.start()
 main()
-@app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
-async def files_handler(bot,Message,update=bot ):
-        print('file')
-        link=''
-        file = None
-        media_array = [Message.document, Message.video, Message.audio]
-        for i in media_array:
-            if i is not None:
-                file = i
-                break
 
-        if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
-            if file is not None:
-                if file.mime_type != "application/x-bittorrent":
-                    listener = mirror.MirrorListener(bot, update, pswd='', isTar=False, extract=False)
-                    tg_downloader = TelegramDownloadHelper(listener)
-                    ms = update.message
-                    tg_downloader.add_download(ms, f'{DOWNLOAD_DIR}{listener.uid}/', name)
-                    return
-                else:
-                    if qbit:
-                        file.get_file().download(custom_path=f"/usr/src/app/{file.file_name}")
-                        link = f"/usr/src/app/{file.file_name}"
-                    else:
-                        link = file.get_file().file_path
+
 idle()
 
 
