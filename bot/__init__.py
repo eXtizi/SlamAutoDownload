@@ -160,7 +160,14 @@ if DB_URI is not None:
     finally:
         cur.close()
         conn.close()
-
+try:
+    RPLC_STR = getConfig('RPLC_STR')
+    if len(RPLC_STR) == 0:
+        raise KeyError
+except KeyError:
+    logging.warning('Replacable strings not provided!')
+    RPLC_STR = None
+RPLC_STR
 LOGGER.info("Generating USER_SESSION_STRING")
 app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 
