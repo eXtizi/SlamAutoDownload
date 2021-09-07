@@ -69,6 +69,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 def fileshandler(update,context ):
         print('file')
         link=''
+        name=''
         file = None
         media_array = [update.message.document, update.message.video, update.message.audio]
         for i in media_array:
