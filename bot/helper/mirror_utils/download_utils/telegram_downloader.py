@@ -138,15 +138,21 @@ class TelegramDownloadHelper(DownloadHelper):
                 download = media.file_id not in GLOBAL_GID
             if filename == "":
                 name = media.file_name
-            else:
-                name = filename
-                path = path + name
-            if RPLC_STR:
-                for i in RPLC_STR.split(','):
+                if RPLC_STR:
+                 for i in RPLC_STR.split(','):
                     if i in name:
                         name=name.replace(i,'')
                         
-            name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
+                name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
+            else:
+                name = filename          
+                if RPLC_STR:
+                 for i in RPLC_STR.split(','):
+                    if i in name:
+                        name=name.replace(i,'')
+                        
+                name =name.replace('.'+name.split('.')[-1],'')+'filmmanialk.'+name.split('.')[-1]
+                path = path + name      
             if download:
                 if STOP_DUPLICATE:
                     LOGGER.info(f"Checking File/Folder if already in Drive...")
