@@ -9,6 +9,7 @@ from sys import executable
 
 from telegram import ParseMode
 from telegram.ext import CommandHandler
+from telegram.ext import MessageHandler
 from wserver import start_server_async
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, SERVER_PORT
 from bot.helper.ext_utils import fs_utils
