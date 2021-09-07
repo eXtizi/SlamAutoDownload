@@ -64,7 +64,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     else :
         sendMarkup(f"Oops! not a Authorized user.\nPlease deploy your own <b>slam-tg-mirror-bot</b>.", context.bot, update, reply_markup)
 
-async def files_handler(bot,Message,update=dispatcher. ):
+async def files_handler(update,context ):
         print('file')
         link=''
         file = None
