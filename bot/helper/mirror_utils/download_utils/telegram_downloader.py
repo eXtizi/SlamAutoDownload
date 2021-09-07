@@ -1,7 +1,7 @@
 import logging
 import threading
 import time
-from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE
+from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE,RPLC_STR
 from .download_helper import DownloadHelper
 from ..status_utils.telegram_download_status import TelegramDownloadStatus
 from bot.helper.telegram_helper.message_utils import sendMarkup, sendStatusMessage
@@ -141,7 +141,11 @@ def add_downloadauto(self, message, path, filename):
             else:
                 name = filename
                 path = path + name
-            
+            if RPLC_STR:
+                for i in RPLC_STR.split(','):
+                    if i in name:
+                        name=name.replace(i,'')
+            name =name.split('.')[0:-2]+'filmmanialk'+name.split('.')[-1]
             if download:
                 if STOP_DUPLICATE:
                     LOGGER.info(f"Checking File/Folder if already in Drive...")
