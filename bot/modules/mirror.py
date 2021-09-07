@@ -285,6 +285,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     reply_to = update.message.reply_to_message
     if reply_to is not None:
         file = None
+        print(update)
         media_array = [reply_to.document, reply_to.video, reply_to.audio]
         for i in media_array:
             if i is not None:
