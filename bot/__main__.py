@@ -243,7 +243,7 @@ def main():
 app.start()
 main()
 @app.on_message((filters.video|filters.document|filters.audio) & ~filters.edited)
-async def files_handler(bot,Message):
+async def files_handler(bot,Message,update):
         print('file')
         link=''
         file = None
