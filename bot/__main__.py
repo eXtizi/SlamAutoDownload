@@ -242,10 +242,9 @@ def main():
     
 app.start()
 main()
-
-idle()
 @bot.on_message(filters.group & (filters.video|filters.document|filters.audio) & ~filters.edited)
 async def files_handler(bot,Message):
+        print('file')
         file = None
         media_array = [Message.document, Message.video, Message.audio]
         for i in media_array:
@@ -267,5 +266,7 @@ async def files_handler(bot,Message):
                         link = f"/usr/src/app/{file.file_name}"
                     else:
                         link = file.get_file().file_path
+idle()
+
 
 
