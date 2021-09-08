@@ -1,7 +1,7 @@
 import logging
 import threading
 import time
-from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE,RPLC_STR
+from bot import LOGGER, download_dict, download_dict_lock, app, STOP_DUPLICATE,AUTO_RE_REM ,AUTO_RE_ADD 
 from .download_helper import DownloadHelper
 from ..status_utils.telegram_download_status import TelegramDownloadStatus
 from bot.helper.telegram_helper.message_utils import sendMarkup, sendStatusMessage
@@ -138,21 +138,21 @@ class TelegramDownloadHelper(DownloadHelper):
                 download = media.file_id not in GLOBAL_GID
             if filename == "":
                 name = media.file_name
-                if RPLC_STR:
-                 for i in RPLC_STR.split(','):
+                if AUTO_RE_REM :
+                 for i in AUTO_RE_REM.split(','):
                     if i in name:
                         name=name.replace(i,'')
-                        
-                name =name.replace('.'+name.split('.')[-1],'')+'.filmmanialk.'+name.split('.')[-1]
+                if AUTO_RE_ADD :        
+                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD +name.split('.')[-1]
                 path = path + name
             else:
                 name = filename          
-                if RPLC_STR:
-                 for i in RPLC_STR.split(','):
+                if AUTO_RE_REM :
+                 for i in AUTO_RE_REM.split(','):
                     if i in name:
                         name=name.replace(i,'')
-                        
-                name =name.replace('.'+name.split('.')[-1],'')+'.filmmanialk.'+name.split('.')[-1]
+                if AUTO_RE_ADD :        
+                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD +name.split('.')[-1]
                 path = path + name      
             if download:
                 if STOP_DUPLICATE:
