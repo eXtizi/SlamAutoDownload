@@ -143,7 +143,7 @@ class TelegramDownloadHelper(DownloadHelper):
                     if i in name:
                         name=name.replace(i,'')
                 if AUTO_RE_ADD :        
-                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD +name.split('.')[-1]
+                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD+'.'+name.split('.')[-1]
                 path = path + name
             else:
                 name = filename          
@@ -152,7 +152,7 @@ class TelegramDownloadHelper(DownloadHelper):
                     if i in name:
                         name=name.replace(i,'')
                 if AUTO_RE_ADD :        
-                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD +name.split('.')[-1]
+                 name =name.replace('.'+name.split('.')[-1],'')+AUTO_RE_ADD+'.'+ name.split('.')[-1]
                 path = path + name      
             if download:
                 if STOP_DUPLICATE:
