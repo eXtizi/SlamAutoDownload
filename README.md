@@ -6,7 +6,7 @@
 
 ###### AUTO_RE_ADD: string to add before file extension <br>
 ###### AUTO_RE_REM: string to remove in file name <br>
-###### AUTO_TG_ADD: leave this empty or false to disable auto download ,True to enable  <br>
+###### AUTO_TG_DOWN: leave this empty or false to disable auto download ,True to enable  <br>
 
 ###### things to do: auto extract rar files if AUTO_RAR is true🙂 <br>
 
