@@ -12,7 +12,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 from telegram.ext.filters import Filters
 from wserver import start_server_async
-from bot import bot, dispatcher,DOWNLOAD_DIR, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, SERVER_PORT
+from bot import bot, dispatcher,DOWNLOAD_DIR, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, SERVER_PORT,AUTO_TG_DOWN 
 from bot.helper.ext_utils import fs_utils
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
@@ -263,7 +263,8 @@ def main():
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
-    dispatcher.add_handler(files_handler)
+    if AUTO_TG_DOWN :
+     dispatcher.add_handler(files_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
     LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
