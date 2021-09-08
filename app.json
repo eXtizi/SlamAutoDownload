@@ -181,6 +181,21 @@
         "description": "Fill your URL if you are using extra buttons.",
         "required": false
       },
+        
+        "AUTO_RE_ADD": {
+        "description": "string to add before file extension",
+        "required": false
+      },
+        
+        "AUTO_RE_REM":  {
+        "description": "string to remove in file name",
+        "required": false
+      },
+        
+        "AUTO_TG_ADD":   {
+        "description": "leave this empty or false to disable auto download ,True to enable",
+        "required": false
+      },
       "STATUS_LIMIT": {
         "description": "Status limit with buttons, Recommend limit status to 4 tasks max.",
         "required": false
