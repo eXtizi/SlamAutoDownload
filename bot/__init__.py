@@ -161,13 +161,13 @@ if DB_URI is not None:
         cur.close()
         conn.close()
 try:
-    RPLC_STR = getConfig('RPLC_STR')
-    if len(RPLC_STR) == 0:
+    AUTO_RE_REM = getConfig('AUTO_RE_REM')
+    if len(AUTO_RE_REM) == 0:
         raise KeyError
 except KeyError:
-    logging.warning('Replacable strings not provided!')
-    RPLC_STR = None
-RPLC_STR
+    logging.warning('Auto Renaming Remove strings not provided!')
+    AUTO_RE_REM = None
+
 LOGGER.info("Generating USER_SESSION_STRING")
 app = Client(':memory:', api_id=int(TELEGRAM_API), api_hash=TELEGRAM_HASH, bot_token=BOT_TOKEN)
 
@@ -200,8 +200,8 @@ except KeyError:
 try:
     AUTO_RE_ADD = getConfig('AUTO_RE_ADD')
 except KeyError:
-    logging.warning('Auto Renaming Add strings Disabled!')
-    AUTO_RE_ADD = False
+    logging.warning('Auto Renaming add strings not provided!')
+    AUTO_RE_ADD = None
     
 try:
     MEGA_EMAIL_ID = getConfig('MEGA_EMAIL_ID')
