@@ -192,7 +192,7 @@ except KeyError:
     logging.warning('MEGA API KEY not provided!')
     MEGA_API_KEY = None
 try:
-    AUTO_TG_DOWN = (getConfig('AUTO_TG_DOWN')
+    AUTO_TG_DOWN = (getConfig('AUTO_TG_DOWN'))
     if AUTO_TG_DOWN.lower() == 'true':
         AUTO_TG_DOWN = True
 except KeyError:
