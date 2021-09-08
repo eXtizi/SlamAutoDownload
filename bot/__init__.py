@@ -192,6 +192,18 @@ except KeyError:
     logging.warning('MEGA API KEY not provided!')
     MEGA_API_KEY = None
 try:
+    AUTO_TG_DOWN = getConfig('AUTO_TG_DOWN')
+except KeyError:
+    logging.warning('Auto Telegram Download Disabled!')
+    AUTO_TG_DOWN = False
+    
+try:
+    AUTO_RE_ADD = getConfig('AUTO_RE_ADD')
+except KeyError:
+    logging.warning('Auto Renaming Add strings Disabled!')
+    AUTO_RE_ADD = False
+    
+try:
     MEGA_EMAIL_ID = getConfig('MEGA_EMAIL_ID')
     MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
     if len(MEGA_EMAIL_ID) == 0 or len(MEGA_PASSWORD) == 0:
