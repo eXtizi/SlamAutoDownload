@@ -160,6 +160,14 @@ if DB_URI is not None:
     finally:
         cur.close()
         conn.close()
+
+try:
+    CREDIT = getConfig('CREDIT')
+    if len(CREDIT) == 0:
+        raise KeyError
+except KeyError:
+    logging.warning('Credit strings not provided!,using user details as Credits')
+    CREDIT = None
 try:
     AUTO_RE_REM = getConfig('AUTO_RE_REM')
     if len(AUTO_RE_REM) == 0:
