@@ -22,7 +22,6 @@ from bot.helper.telegram_helper import button_build
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, config, updates
 from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper
 from bot.helper.ext_utils import fs_utils, bot_utils
-
 def stats(update, context):
     currentTime = get_readable_time(time.time() - botStartTime)
     total, used, free = shutil.disk_usage('.')
@@ -171,6 +170,7 @@ def bot_help(update, context):
 /{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
+/{BotCommands.VmirrorCommand} [link]|[name*optinol]|[embeded website*optinol]|[quality*optional]: Download Vimeo links
 '''
 
     help_string = f'''
@@ -201,6 +201,7 @@ def bot_help(update, context):
 /{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
 
 /{BotCommands.TsHelpCommand}: Get help for Torrent search module
+/{BotCommands.VmirrorCommand} [link]|[name]|[embeded website*optinol]|[quality*optional]: Download Vimeo links
 '''
 
     if CustomFilters.sudo_user(update) or CustomFilters.owner_filter(update):
@@ -228,6 +229,7 @@ botcmds = [
         (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
         (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
         (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
+        (f'{BotCommands.VmirrorCommand}','Download Vimeo links')
     ]
 
 
