@@ -375,8 +375,30 @@ def _mirror(bot, update, isTar=False, extract=False):
     else:
         ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
         sendStatusMessage(update, bot)
-
-
+def vmirror(update, context):
+    mesg = update.message.text.split(' ', maxsplit=1)
+    try:
+     message_args=mesg[1].split('|')
+    except IndexError:
+        sendMessage('No download source provided', bot, update)
+        return
+    vlink=message_args[0]
+    try:
+     name=message_args[1]
+    except IndexError:
+        name = ''
+    try:
+     site=message_args[2]
+    except IndexError:
+        site = False
+    try:
+     qul=message_args[3]
+    except IndexError:
+        qul = 360
+    link=vimdown(vlink,site,qul,bot,update)
+    listener = MirrorListener(bot, update)
+    ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
+    sendStatusMessage(update, bot)
 def mirror(update, context):
     _mirror(context.bot, update)
 
@@ -395,6 +417,9 @@ tar_mirror_handler = CommandHandler(BotCommands.TarMirrorCommand, tar_mirror,
                                     filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
                                       filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+vmirror_handler = CommandHandler(BotCommands.VmirrorCommand, vmirror,
+                                      filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(mirror_handler)
 dispatcher.add_handler(tar_mirror_handler)
 dispatcher.add_handler(unzip_mirror_handler)
+dispatcher.add_handler(vmirror_handler)
