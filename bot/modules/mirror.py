@@ -1,6 +1,7 @@
 import requests
 from telegram.ext import CommandHandler
 from telegram import InlineKeyboardMarkup
+from .vimeo import vimdown
 
 from bot import Interval, INDEX_URL, BUTTON_FOUR_NAME, BUTTON_FOUR_URL, BUTTON_FIVE_NAME, BUTTON_FIVE_URL, BUTTON_SIX_NAME, BUTTON_SIX_URL, BLOCK_MEGA_FOLDER, BLOCK_MEGA_LINKS, VIEW_LINK, aria2, get_client,CREDIT
 from bot import dispatcher, DOWNLOAD_DIR, download_dict, download_dict_lock, SHORTENER, SHORTENER_API, TAR_UNZIP_LIMIT
@@ -396,7 +397,7 @@ def vmirror(update, context):
     except IndexError:
         qul = 360
     link=vimdown(vlink,site,qul,bot,update)
-    listener = MirrorListener(bot, update)
+    listener = MirrorListener(bot, update, pswd='', isTar=False, extract=False, qbit=False)
     ariaDlManager.add_download(link, f'{DOWNLOAD_DIR}/{listener.uid}/', listener, name)
     sendStatusMessage(update, bot)
 def mirror(update, context):
