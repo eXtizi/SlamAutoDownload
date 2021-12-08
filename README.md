@@ -11,6 +11,8 @@
 ###### AUTO_RE_REM: string to remove in file name <br>
 ###### AUTO_TG_DOWN: leave this empty or false to disable auto download ,True to enable  <br>
 ###### CREDIT:Leave this empty to add usernames for cc or add some text you wanna add to cc
+###### Vimeo Direct Mirror Support Added (/vmirror, check help for more details)
+
 
 ###### things to do: auto extract rar files if AUTO_RAR is true🙂 <br>
 
