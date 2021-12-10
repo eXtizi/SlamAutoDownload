@@ -5,6 +5,10 @@ def getId(link,bot,update):
  print(link)
  for i in linksp:
      print(i)
+   
+     i=i.strip()
+
+
      if (len(i)==9) and("vimeo" not in i):
         return i
         break
