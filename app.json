@@ -192,7 +192,7 @@
         "required": false
       },
         
-        "AUTO_TG_ADD":   {
+        "AUTO_TG_DOWN":   {
         "description": "leave this empty or false to disable auto download ,True to enable",
         "required": false
       },
